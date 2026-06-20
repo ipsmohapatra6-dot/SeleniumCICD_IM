@@ -47,13 +47,13 @@ namespace DotNetSeleniumProject.Report
                 using (var smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
                     mail.From = new MailAddress("FromMailAddress");
-                    mail.To.Add("");
+                    mail.To.Add("ToMailAddress");
                     mail.Subject = "Selenium Test Execution Report";
                     mail.Body = "Please find attached.";
                     mail.Attachments.Add(attachment);
 
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential("mailaddress", "<APP_PASSWORD>");                    
+                    smtp.Credentials = new NetworkCredential("FrommMailAddress", "<APP_PASSWORD>");                    
                     smtp.EnableSsl = true;
                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 

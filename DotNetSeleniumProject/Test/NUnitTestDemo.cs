@@ -114,7 +114,7 @@ namespace DotNetSeleniumProject.Test
             try
             {
                 extentTest = extentReports.CreateTest("Dashboard Test For Employees Site").Log(Status.Info, "Dashboard Test with POM starts");
-                //Click on Dashboard link
+               
                 LoginPage loginPage = new LoginPage(_driver);
                 loginPage.ClickDashboardLink();
                 extentTest.Log(Status.Pass, "Dashboard link is clicked.");
