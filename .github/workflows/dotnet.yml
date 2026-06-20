@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: Dotnet test --filter "Category=smoke"
+      run: dotnet test --filter "Category=smoke"
