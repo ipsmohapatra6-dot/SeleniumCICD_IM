@@ -20,19 +20,40 @@ namespace DotNetSeleniumProject.Report
         {
 
 
+            //if (_extentReports == null)
+            //{
+            //    _extentReports = new ExtentReports();
+            //    // Use a timestamped filename so previous runs are preserved.
+            //    //var filename = filePath ?? $"ExtentReport-{DateTime.Now:yyyyMMdd-HHmmss}.html";
+            //    var spark = new ExtentSparkReporter("ExtentReport.html");
+            //    _extentReports.AttachReporter(spark);
+            //    _extentReports.AddSystemInfo("OS", "Windows 11");
+            //    _extentReports.AddSystemInfo("Browser", driverType.ToString());
+            //}
+
+            //// Create a test placeholder if needed. Actual per-test ExtentTest should be created by the test class.
+            //_extentTest = _extentReports.CreateTest("Test Suite Initialization");//.Log(Status.Info, "Extent report initialized");
+            //return (_extentReports, _extentTest);
             if (_extentReports == null)
             {
                 _extentReports = new ExtentReports();
-                // Use a timestamped filename so previous runs are preserved.
-                //var filename = filePath ?? $"ExtentReport-{DateTime.Now:yyyyMMdd-HHmmss}.html";
-                var spark = new ExtentSparkReporter("ExtentReport.html");
+
+                // Create a stable, relative path for CI/CD and local runs
+                string reportsDir = Path.Combine(Directory.GetCurrentDirectory(), "Reports");
+                Directory.CreateDirectory(reportsDir);
+
+                // Timestamped filename to preserve previous runs
+                string reportFile = Path.Combine(reportsDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
+
+                var spark = new ExtentSparkReporter(reportFile);
                 _extentReports.AttachReporter(spark);
+
                 _extentReports.AddSystemInfo("OS", "Windows 11");
                 _extentReports.AddSystemInfo("Browser", driverType.ToString());
             }
 
-            // Create a test placeholder if needed. Actual per-test ExtentTest should be created by the test class.
-            _extentTest = _extentReports.CreateTest("Test Suite Initialization");//.Log(Status.Info, "Extent report initialized");
+            // Create a placeholder test entry
+            _extentTest = _extentReports.CreateTest("Test Suite Initialization");
             return (_extentReports, _extentTest);
 
         }
