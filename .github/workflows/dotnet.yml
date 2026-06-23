@@ -1,4 +1,4 @@
-name: Nightly Selenium Tests
+xname: Nightly Selenium Tests
 
 on:
   push:
@@ -25,9 +25,9 @@ jobs:
       - name: Run tests
         run: dotnet test --filter "Category=smoke"
       - name: Verify Reports Directory
-        run: ls -R
+        run: ls -R Reports
       - name: Upload Extent Report
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
-          path: DotNetSeleniumProject/Reports/*.html
+          path: Reports/*.html
