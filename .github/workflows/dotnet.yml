@@ -1,4 +1,4 @@
-xname: Nightly Selenium Tests
+name: Nightly Selenium Tests
 
 on:
   push:
