@@ -83,7 +83,7 @@ namespace DotNetSeleniumProject.Test
         //}
 
         [Test]
-        [Category("smoke")]
+        //[Category("smoke")]
         public void EAWebSiteLoginTestWithPOM()
         {
             try
