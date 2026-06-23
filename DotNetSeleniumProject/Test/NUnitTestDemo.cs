@@ -55,6 +55,10 @@ namespace DotNetSeleniumProject.Test
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--headless=new");
+            options.AddArgument("--window-size=1920,1080");
+            options.AddArgument("--disable-gpu");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
             switch (driverType)
             {
                 case DriverTypes.Chrome:
@@ -149,6 +153,21 @@ namespace DotNetSeleniumProject.Test
         }
 
         [Test]
+        public void TestSwitchingFrame()
+        {
+            FrameHelper frameHelper = new FrameHelper(_driver);
+            frameHelper.SwitchToFrameByIndex(0);
+
+            _driver.FindElement
+                (By.Id("frame_1_txt_box")).EnterText("admin");
+            frameHelper.SwitchToFrameByName("frame2");
+            _driver.FindElement
+                 (By.Name("frame_2_btn")).Submit();
+
+            frameHelper.SwitchToDefaultContent();
+        }
+
+        [Test]
         //Fluent wait is a form of explicit wait allows to set the maximum wait time, polling interval and also ignore exception types
         //Useful for handeling dynamic elements that appear unpredictabily on screen
         public void TestFluentWait()
@@ -183,6 +202,18 @@ namespace DotNetSeleniumProject.Test
         {
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             var element = _driver.FindElement(By.Id("UserName"));
+
+        }
+        [Test]
+        [TestCase("SomeWindowTitle")]
+        public void TestSwitchingWindow(string windowTitle)
+        {
+            MultipleWindowHelper windowHelper = new MultipleWindowHelper(_driver);
+            windowHelper.SwitchToWindowByTitle(windowTitle);
+            //
+            //** Perform some actions in child window after switching
+            //
+            windowHelper.SwitchToMainWindow();
 
         }
 

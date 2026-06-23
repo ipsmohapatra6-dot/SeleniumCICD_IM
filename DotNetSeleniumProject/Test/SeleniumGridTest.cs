@@ -33,7 +33,6 @@ namespace DotNetSeleniumProject.Test
 
 
         [Test]
-        [Category("smoke")]
         public void EAWebSiteTestWithPOM()
         {//
             //Click on log in link
