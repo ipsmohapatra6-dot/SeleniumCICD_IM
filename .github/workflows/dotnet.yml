@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '0 10 * * *'   # runs daily at 10:00 UTC (3:30 PM IST)
+    - cron: '0 10 * * *'  # runs daily at 10:00 UTC (3:30 PM IST)
 
 jobs:
   build:
@@ -14,18 +14,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-          
+
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Run tests
         run: dotnet test --filter "Category=smoke"
+
+      # 🧩 Debug step to inspect workspace after tests
+      - name: Debug workspace
+        run: pwd && ls -R
+
       - name: Verify Reports Directory
         run: ls -R ExtentReport
+
       - name: Upload Extent Report
         uses: actions/upload-artifact@v4
         with:
