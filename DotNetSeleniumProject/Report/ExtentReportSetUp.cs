@@ -39,17 +39,26 @@ namespace DotNetSeleniumProject.Report
                 _extentReports = new ExtentReports();
 
                 // Create a stable, relative path for CI/CD and local runs
-                string reportsDir = Path.Combine(Directory.GetCurrentDirectory(), "Reports");
-                Directory.CreateDirectory(reportsDir);
+                //string reportsDir = Path.Combine(Directory.GetCurrentDirectory(), "Reports");
+                //Directory.CreateDirectory(reportsDir);
 
-                // Timestamped filename to preserve previous runs
-                string reportFile = Path.Combine(reportsDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
+                //// Timestamped filename to preserve previous runs
+                //string reportFile = Path.Combine(reportsDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
+
+                //var spark = new ExtentSparkReporter(reportFile);
+                //_extentReports.AttachReporter(spark);
+
+                //_extentReports.AddSystemInfo("OS", "Windows 11");
+                //_extentReports.AddSystemInfo("Browser", driverType.ToString());
+
+                string customDir = Path.Combine("C:\\GitHubSourceRepo\\SeleniumCICD_IM\\DotNetSeleniumProject", "ExtentReport");
+               
+                Directory.CreateDirectory(customDir); // ensures folder exists
+
+                string reportFile = Path.Combine(customDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
 
                 var spark = new ExtentSparkReporter(reportFile);
                 _extentReports.AttachReporter(spark);
-
-                _extentReports.AddSystemInfo("OS", "Windows 11");
-                _extentReports.AddSystemInfo("Browser", driverType.ToString());
             }
 
             // Create a placeholder test entry
