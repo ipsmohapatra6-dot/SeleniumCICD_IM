@@ -25,9 +25,9 @@ jobs:
       - name: Run tests
         run: dotnet test --filter "Category=smoke"
       - name: Verify Reports Directory
-        run: ls -R Reports
+        run: ls -R ExtentReport
       - name: Upload Extent Report
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
-          path: Reports/*.html
+          path: ExtentReport/*.html
