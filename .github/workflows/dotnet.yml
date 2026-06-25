@@ -26,15 +26,16 @@ jobs:
       - name: Run tests
         run: dotnet test --filter "Category=smoke"
 
-      # 🧩 Debug step to inspect workspace after tests
+      # 🧩 Debug workspace
       - name: Debug workspace
         run: pwd && ls -R
 
+      # ✅ Corrected path based on debug output
       - name: Verify Reports Directory
-        run: ls -R ExtentReport
+        run: ls -R DotNetSeleniumProject/ExtentReport
 
       - name: Upload Extent Report
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
-          path: ExtentReport/*.html
+          path: DotNetSeleniumProject/ExtentReport/*.html
