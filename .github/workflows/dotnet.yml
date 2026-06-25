@@ -24,9 +24,10 @@ jobs:
 
       - name: Run tests
         run: dotnet test --filter "Category=smoke"
-
+      - name: Verify Reports Directory
+        run: ls -R ExtentReport
       - name: Upload Extent Report
         uses: actions/upload-artifact@v4
         with:
           name: ExtentReport
-          path: ./DotNetSeleniumProject\bin\Debug\net8.0\ExtentReport.html
+          path: ExtentReport/*.html
