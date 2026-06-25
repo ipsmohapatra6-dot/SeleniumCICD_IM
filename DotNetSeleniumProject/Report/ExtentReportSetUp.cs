@@ -51,8 +51,12 @@ namespace DotNetSeleniumProject.Report
                 //_extentReports.AddSystemInfo("OS", "Windows 11");
                 //_extentReports.AddSystemInfo("Browser", driverType.ToString());
 
-                string customDir = Path.Combine("C:\\GitHubSourceRepo\\SeleniumCICD_IM\\DotNetSeleniumProject", "ExtentReport");
-               
+                //string customDir = Path.Combine("C:\\GitHubSourceRepo\\SeleniumCICD_IM\\DotNetSeleniumProject", "ExtentReport");
+                string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory())!
+                                 .Parent!.Parent!.FullName;
+                string customDir = Path.Combine(projectRoot, "ExtentReport");
+                
+
                 Directory.CreateDirectory(customDir); // ensures folder exists
 
                 string reportFile = Path.Combine(customDir, $"ExtentReport_{DateTime.Now:yyyyMMdd_HHmmss}.html");
